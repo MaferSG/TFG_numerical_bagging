@@ -1,0 +1,90 @@
+Baggy README December 2016
+
+
+REQUIREMENTS:
+
+python >= 3.0
+Baggy is built on top of Fast Downward.
+
+
+USAGE:
+
+Baggy is a 3-step process.
+
+STEP 1) REFORMULATION
+STEP 2) SEARCH
+STEP 3) SOLUTION TRANSFORMATION
+
+
+---------------------
+STEP 1) REFORMULATION
+
+python3 baggy.py <domain.pddl> <problem.pddl> --writeout_reformulated_pddl
+
+If bagging is successful, Baggy will generate 5 files:
+
+a) original-domain.pddl		- The original domain parsed, possibly with repairs made. Repairs may include the removal of unused predicates or the splitting of types into subtypes. 
+b) original-problem.pddl	- The original problem parsed, possibly with repairs made.
+c) reformulated-domain.pddl	- The reformulated domain file. This should be used in STEP 2) SEARCH.
+d) reformulated-problem.pddl	- The reformulated problem file. This should be used in STEP 2) SEARCH.
+e) mappings.txt			- A file which contains information on the mapping between the original and reformulated search spaces. This file is needed for STEP 3) SOLUTION TRANSFORMATION.
+
+If bagging is not successful, Baggy will generate 2 files a) and b).
+---------------------
+
+
+
+
+---------------------
+STEP 2) SEARCH
+
+Use a standard planner to generate a solution <solution.txt> to the reformulated problem and domain files generated in STEP 1) REFORMULATION. The solution generated is still in Bagged space and needs to be refined into an original-space solution.
+---------------------
+
+
+
+
+---------------------
+STEP 3) SOLUTION TRANSFORMATION
+
+python3 baggy.py <original-domain.pddl> <original-problem.pddl> --solution <solution.txt> --mapping <mappings.txt> 
+
+numerical_bagging original-domain.pddl original-problem.pddl --solution solution.txt --mapping mappings.txt 
+
+It is important that you parse the "original-" files and not the "reformulated-" files. 
+This will generate 1 file:
+
+a) translated-solution.txt	- The final solution, in original space.
+---------------------
+
+
+OPTIONS
+
+The following options apply to STEP 1) REFORMULATION.
+
+--writeout_reformulation_logic		-> Prints Baggy logic to the command line. This can be useful for seeing which objects are being bagged and why. 
+--enable_pddl_repair			-> Enables a pddl repair protocol, which results in type child of the domain ChildSnack and type person of the domain Pizza being baggable. If any repairs are
+						applied, they will be printed to the "original-" files.
+--ground_operators			-> (RECOMMENDED) Adds preconditions to each Bagged operator. This will significantly improve the translate/preprocess performance but reduces "reformulated-" 
+						file human readability.
+--dont_bag				-> Use if you want to avoid Bagging certain types. Parse as a string without spaces, separated with commas eg. --dont_bag hand,ball
+
+
+
+CONTACT
+
+If you encounter any bugs or other problems please contact Patricia Riddle:
+pat@cs.auckland.ac.nz
+
+
+
+CITATIONS
+
+If you wish to cite this work, please use:
+Riddle, Pat, et al. "Improving Performance by Reformulating PDDL into a Bagged Representation." Heuristics and Search for Domain-independent Planning (HSDIP): 28.
+
+
+
+
+
+

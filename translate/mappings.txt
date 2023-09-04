@@ -1,0 +1,36 @@
+#INVARIANTS
+bag-ball	[]	0
+bag-gripper	[]	0
+
+#BAGS (type, bagname, member)
+ball	ball-bag1	ball3
+ball	ball-bag1	ball4
+ball	ball-bag2	ball1
+ball	ball-bag3	ball2
+gripper	gripper-bag1	rgripper1
+gripper	gripper-bag1	lgripper1
+gripper	gripper-bag2	rgripper2
+gripper	gripper-bag2	lgripper2
+
+#ACTIONS (reformulated action name, original action name, number of parameters in original action)
+move	move	3
+pick	pick	4
+drop	drop	4
+serve	serve	8
+
+#ATTRIBUTES (macropredicate type, attribute number, original predicate name, mapped value)
+
+#DC_PARAMETERS (action name, object type, parameter number in the action, property identifier number)
+
+#GROUNDED_ACTIONS (variable, object, grounded action)
+
+#GSE (bagged object classes which are goal state equivalent)
+ball1
+ball2
+ball3 ball4
+rgripper1 lgripper1
+rgripper2 lgripper2
+
+#BAGGABLE_PARAMETERS_EQUALITY (action, parameter which is still in action, parameter which has been removed from action but is equal to the other one)
+
+#END
